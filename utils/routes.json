@@ -1,0 +1,4 @@
+{
+    "GET_EXPENSES": "/getExpenses",
+    "SAVE_EXPENSE": "/saveExpense"
+}
