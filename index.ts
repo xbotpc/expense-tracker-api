@@ -1,9 +1,14 @@
 import cors from 'cors';
 import express, { Application } from "express";
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import controllers from './controllers';
+import dotenv from 'dotenv';
 
-const port = 8080;
+dotenv.config();
+
+const { PORT, DB_USERNAME, DB_PASSWORD, DB_CLUSTER_LINK } = process.env;
+
+const port = PORT;
 
 //App setup
 const app: Application = express();
@@ -11,19 +16,10 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/expense-tracker',
+mongoose.connect(`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_CLUSTER_LINK}?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true })
     .then((res) => {
         console.log('MONGO CONNECTION SUCCESSFUL')
-
-        // const userSchema: Schema = new Schema({
-        //     name: { type: String, required: true },
-        //     createdAt: { type: Date, required: true },
-        //     transactions: [{
-        //         type: { type: String },
-        //         amount: { type: Number, }
-        //     }]
-        // });
 
         //Controllers
         app.use('/api', controllers)

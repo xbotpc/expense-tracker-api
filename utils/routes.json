@@ -1,6 +1,6 @@
 {
     "GET_TRANSACTIONS": "/transaction/get",
     "SAVE_TRANSACTION": "/transaction/save",
-    "GET_USERS": "/getUsers",
-    "SAVE_USER": "/saveUser"
+    "GET_USERS": "/user/get",
+    "SAVE_USER": "/user/save"
 }
