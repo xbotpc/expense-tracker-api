@@ -1,4 +1,6 @@
 {
-    "GET_EXPENSES": "/getExpenses",
-    "SAVE_EXPENSE": "/saveExpense"
+    "GET_TRANSACTIONS": "/transaction/get",
+    "SAVE_TRANSACTION": "/transaction/save",
+    "GET_USERS": "/getUsers",
+    "SAVE_USER": "/saveUser"
 }

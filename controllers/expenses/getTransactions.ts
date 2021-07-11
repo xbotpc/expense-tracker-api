@@ -1,20 +1,20 @@
 import { Request, Response } from "express";
-import { saveExpensesBL } from "../../BL/saveExpenses";
+import getTransactionsBL from "../../BL/expenses/getTransactions";
 import printErrorMessage from "../../utils/printErrorMessage";
 import { movieResponses } from '../../utils/responseMessages';
 import { INTERNAL_SERVER_ERROR, OK } from '../../utils/statusCodes.json';
 
-const saveExpenses = (req: Request, res: Response) => {
+const getTransactions = async (req: Request, res: Response) => {
     try {
-
-        saveExpensesBL()
+        const allTransactions = await getTransactionsBL(req.body.id);
         res.status(OK);
         res.json({
             status: OK,
+            data: allTransactions.transactions,
             message: movieResponses[OK]
         });
     } catch (error) {
-        printErrorMessage('saveExpenses', error);
+        printErrorMessage('getTransactions', error);
         res.status(INTERNAL_SERVER_ERROR);
         res.json({
             status: INTERNAL_SERVER_ERROR,
@@ -24,4 +24,4 @@ const saveExpenses = (req: Request, res: Response) => {
     }
 }
 
-export default saveExpenses;
+export default getTransactions;
